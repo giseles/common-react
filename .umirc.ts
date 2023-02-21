@@ -6,30 +6,25 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
-  layout: {
-    title: '@umijs/max',
-  },
   routes: [
+    { path: '/login', component: 'Login' },
     {
       path: '/',
-      redirect: '/home',
+      routes: [
+        { path: '/', component: 'Login' },
+        { path: '/home', component: 'Login' },
+        { path: '/home', component: '404' },
+      ],
     },
-    {
-      name: '首页',
-      path: '/home',
-      component: './Home',
-    },
-    {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
-    },
-    {
-        name: ' CRUD 示例',
-        path: '/table',
-        component: './Table',
-    },
+    { path: '/*', component: '404' },
   ],
+  proxy: {
+    '/api': {
+      target: 'http://jsonplaceholder.typicode.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
+  favicons: ['/assets/favicon.ico'],
   npmClient: 'pnpm',
 });
-
