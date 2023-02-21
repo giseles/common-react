@@ -1,0 +1,45 @@
+.form {
+  :global {
+    .ant-btn-lg {
+      margin: 0 10px;
+      min-width: 100px;
+    }
+    .ant-input-affix-wrapper {
+      padding: 5px 11px;
+      height: 40px;
+      border-radius: 6px;
+      > input.ant-input {
+        font-size: 14px;
+      }
+    }
+    .ant-input-affix-wrapper.ant-input-affix-wrapper-textarea-with-clear-btn {
+      height: auto;
+    }
+    textarea.ant-input {
+      padding: 0;
+    }
+    .ant-select-selector,
+    .ant-cascader-input.ant-input,
+    .ant-picker-large .ant-picker-input > input {
+      font-size: 14px;
+    }
+    .ant-form-item-control-input-content p {
+      white-space: pre;
+    }
+    // 上传框只显示最后一个
+    .ant-upload-list {
+      > div:not(:last-child) {
+        display: none;
+      }
+    }
+  }
+}
+.formLayoutCenter {
+  :global {
+    .ant-form-item,
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
