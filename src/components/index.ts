@@ -1,6 +1,6 @@
 // export * from './Breadcrumb';
 // export * from './Description';
-// export * from './Empty';
+export * from './Empty';
 export * from './IconFont';
 export * from './LayoutHeader';
 export * from './LayoutSider';

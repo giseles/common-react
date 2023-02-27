@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAppData } from 'umi';
+import { useAppData, history } from 'umi';
+import { login } from './service';
 
 export default () => {
-  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   let pathname = useAppData().history.location.pathname;
   useEffect(() => {
     console.log(pathname);
@@ -11,29 +12,28 @@ export default () => {
       console.log('离开');
     };
   }, [pathname]);
-  // 增加数量
-  const addCount = useCallback((val: number = 1) => {
-    setCount((pre) => {
-      return pre + val;
-    });
-  }, []);
 
-  // 减少数量
-  const substractCount = useCallback((val: number = 1) => {
-    setCount((pre) => {
-      return pre - val;
-    });
-  }, []);
-
-  // 增加数量
+  // 清空状态
   const toClear = useCallback(() => {
-    setCount(0);
+    setLoading(false);
+  }, []);
+
+  // 登录
+  const toSubmit = useCallback(async (data) => {
+    setLoading(true);
+    try {
+      const res = await login(data);
+      console.log(res);
+      console.log('sdfsfsd');
+      history.push('/home');
+    } catch (err) {
+      setLoading(false);
+    }
   }, []);
 
   return {
-    count,
-    addCount,
-    substractCount,
+    loading,
     toClear,
+    toSubmit,
   };
 };

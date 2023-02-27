@@ -11,8 +11,8 @@ export default defineConfig({
     {
       path: '/',
       routes: [
-        { path: '/', component: 'Login' },
-        { path: '/home', component: 'Login' },
+        { path: '/', component: '404' },
+        { path: '/home', component: '404' },
         { path: '/home', component: '404' },
       ],
     },
@@ -20,7 +20,7 @@ export default defineConfig({
   ],
   proxy: {
     '/api': {
-      target: 'http://jsonplaceholder.typicode.com/',
+      target: 'https://gateway-admin-travel.newtest.senthink.com/',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },

@@ -1,0 +1,126 @@
+.wrap {
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: rgba(250, 251, 255, 1)
+    linear-gradient(90deg, rgba(82, 162, 255, 1) 0%, rgba(2, 120, 255, 1) 100%);
+  main {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    padding: 0 80px;
+    min-width: 710px;
+    min-height: 720px;
+    width: 85%;
+    height: 80%;
+    border-radius: 16px;
+    background-color: #e8f3ff;
+    box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.08),
+      6px 6px 24px 0px rgba(0, 0, 0, 0.1);
+  }
+  .bgImg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 95%;
+    height: 800px;
+    background: url('../../assets/login-img2.png') no-repeat center center;
+    background-size: contain;
+  }
+  .leftImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    background: url('../../assets/login-img.png') no-repeat center center;
+    background-size: contain;
+  }
+
+  .right {
+    z-index: 999;
+    display: flex;
+    overflow: hidden;
+    flex-flow: column;
+    padding: 60px;
+    min-width: 400px;
+    width: 40%;
+    height: 620px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 2px 2px 16px 0px rgba(43, 56, 82, 0.1);
+    font-family: 'Microsoft YaHei', '微软雅黑', 'Segoe UI', Tahoma, Geneva,
+      Verdana, sans-serif;
+    .title {
+      .img {
+        width: 200px;
+        height: 72px;
+        background: url('../../assets/logo-login.png') no-repeat center left;
+        background-size: contain;
+      }
+
+      .name {
+        margin: 20px 0 70px;
+        color: #2b3852;
+        font-weight: bold;
+        font-size: 28px;
+      }
+    }
+    .btn {
+      margin-top: 60px;
+      width: 100%;
+      height: 62px;
+      border-radius: 6px !important;
+      background: #5089fd;
+      font-size: 22px;
+    }
+  }
+}
+
+.loginForm {
+  // 改造Ant表单样式
+  :global {
+    .ant-input {
+      &:-webkit-autofill {
+        background: transparent;
+        transition: background-color 50000s ease-in-out 0s;
+
+        -webkit-text-fill-color: #2b3852;
+      }
+      &:-webkit-autofill::first-line {
+        font-size: 16px !important;
+      }
+    }
+    .ant-form-item {
+      margin-bottom: 32px;
+    }
+    .ant-input-affix-wrapper {
+      // border: 1px solid #5089fd;
+      border: 1px solid #e2e5ed;
+      border-radius: 6px !important;
+      background: #f7f8fa !important;
+      font-size: 16px;
+    }
+    .ant-input-affix-wrapper-status-success:active {
+      border: 1px solid #5089fd;
+    }
+    .ant-input-affix-wrapper > .ant-input:not(textarea) {
+      padding: 10px 11px;
+      background: #f7f8fa !important;
+    }
+    .ant-input-affix-wrapper-status-error
+      .ant-input::-webkit-input-placeholder {
+      color: #e35639;
+    }
+    .ant-form-item-control-input-content > * {
+      box-shadow: none !important;
+    }
+    .ant-form-item-explain {
+      display: none;
+    }
+  }
+}

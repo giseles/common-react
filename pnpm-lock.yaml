@@ -6,15 +6,15 @@ specifiers:
   '@ant-design/pro-components': ^2.0.1
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
-  '@umijs/hooks': ^1.9.3
   '@umijs/max': ^4.0.52
   antd: ^5.0.0
   antd-img-crop: ^4.6.0
   axios: ^1.3.3
   braft-editor: ^2.3.9
-  common-hook: ^1.0.5
-  common-mid: ^0.5.9
-  common-screw: ^1.2.6
+  common-hook: 1.0.5
+  common-mid: 0.5.10
+  common-screw: 1.2.6
+  crypto-js: ^4.1.1
   husky: ^8.0.1
   lint-staged: ^13.0.3
   prettier: ^2.7.1
@@ -27,15 +27,15 @@ dependencies:
   '@ant-design/cssinjs': 1.5.6
   '@ant-design/icons': 4.8.0
   '@ant-design/pro-components': 2.3.57_antd@5.2.2
-  '@umijs/hooks': 1.9.3
   '@umijs/max': 4.0.52_vftga3igpjiwrcdvxb4li5isbm
   antd: 5.2.2
   antd-img-crop: 4.6.0_antd@5.2.2
   axios: 1.3.3
   braft-editor: 2.3.9
   common-hook: 1.0.5
-  common-mid: 0.5.9
+  common-mid: 0.5.10
   common-screw: 1.2.6
+  crypto-js: 4.1.1
   use-deep-compare-effect: 1.8.1
 
 devDependencies:
@@ -3792,19 +3792,6 @@ packages:
       query-string: 6.14.1
     dev: false
 
-  /@umijs/hooks/1.9.3:
-    resolution: {integrity: sha512-h83Zk0x2oO8HeTZlSLsT4KVh+Me1VoXu+DHmT+cpqR7caBhii0T5c8Weko/pFBkEiB4QKzvWi7Zj+78VSKkI5w==}
-    engines: {node: '>=8.0.0'}
-    peerDependencies:
-      react: ^16.8.6
-    dependencies:
-      '@umijs/use-request': 1.4.3
-      intersection-observer: 0.7.0
-      lodash.isequal: 4.5.0
-      resize-observer-polyfill: 1.5.1
-      screenfull: 5.2.0
-    dev: false
-
   /@umijs/lint/4.0.52_ruzltbus2ahohx3d4gtaaywiqa:
     resolution: {integrity: sha512-Zk298O4gAtQ3Puz99u3G4e6e8zk0p1CPkAzRIgkuSg8U2+R3M69bTzAyq4AC5U0WqHuNtIUyQiSUoMmaBD05VQ==}
     dependencies:
@@ -4067,16 +4054,6 @@ packages:
     resolution: {integrity: sha512-QlN0RJSBVQBwLRNxbxjQ5qzqYIGn+K7USppMoIOVlf7fxXHsnQZ2bEsa6Pm74bt6DVQxpUE8HqvdStn6Y9FV1w==}
     peerDependencies:
       react: '*'
-    dev: false
-
-  /@umijs/use-request/1.4.3:
-    resolution: {integrity: sha512-aH4GCdRnMCaaciygdN0KtCDQdBBh1KyiNUAgYDPX8Y4brmbymEpJViX1FU4isOTbV34WlbkWTiBpR9HIi2ciNQ==}
-    peerDependencies:
-      react: ^16.8.6
-    dependencies:
-      lodash.debounce: 4.0.8
-      lodash.throttle: 4.1.1
-      umi-request: 1.4.0
     dev: false
 
   /@umijs/utils/4.0.52:
@@ -5039,8 +5016,8 @@ packages:
     resolution: {integrity: sha512-IBxRS4Zd8HD8lWw09k2OkWwjp38+ngFASZ5VpIXURBw/IftgpbFs78YRhCbWIZlFrbkkU5ZOPqXvOyksa0rftA==}
     dev: false
 
-  /common-mid/0.5.9:
-    resolution: {integrity: sha512-ClRe95yosVEN83zy0ZQB9FIbYAanC7S/7FwA3iUvmIbUw4MeZFgHFNfajEFFmUqsXusoMFqzdH4/hMJ7PYqqSQ==}
+  /common-mid/0.5.10:
+    resolution: {integrity: sha512-paSzh1zXr34h16e0oyBr4KV9KSpCYy1Xg7Vg4K0yqJlU/yb3C3alFc45N9YhmkZ0y2a33QEUaV4AuFBJoLWsdQ==}
     dev: false
 
   /common-path-prefix/3.0.0:
@@ -5196,6 +5173,10 @@ packages:
       public-encrypt: 4.0.3
       randombytes: 2.1.0
       randomfill: 1.0.4
+    dev: false
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
     dev: false
 
   /css-blank-pseudo/3.0.3:
@@ -6841,10 +6822,6 @@ packages:
       side-channel: 1.0.4
     dev: false
 
-  /intersection-observer/0.7.0:
-    resolution: {integrity: sha512-Id0Fij0HsB/vKWGeBe9PxeY45ttRiBmhFyyt/geBdDHBYNctMRTE3dC1U3ujzz3lap+hVXlEcVaB56kZP/eEUg==}
-    dev: false
-
   /intl-format-cache/4.3.1:
     resolution: {integrity: sha512-OEUYNA7D06agqPOYhbTkl0T8HA3QKSuwWh1HiClEnpd9vw7N+3XsQt5iZ0GUEchp5CW1fQk/tary+NsbF3yQ1Q==}
     dev: false
@@ -7557,10 +7534,6 @@ packages:
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-    dev: false
-
-  /lodash.isequal/4.5.0:
-    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
     dev: false
 
   /lodash.merge/4.6.2:
@@ -9139,13 +9112,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dev: false
 
-  /qs/6.11.0:
-    resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
-    engines: {node: '>=0.6'}
-    dependencies:
-      side-channel: 1.0.4
-    dev: false
-
   /query-string/6.14.1:
     resolution: {integrity: sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==}
     engines: {node: '>=6'}
@@ -10360,11 +10326,6 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
 
-  /screenfull/5.2.0:
-    resolution: {integrity: sha512-9BakfsO2aUQN2K9Fdbj87RJIEZ82Q9IGim7FqM5OsebfoFC6ZHXgDq/KvniuLTPdeM8wY2o6Dj3WQ7KeQCj3cA==}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /scroll-into-view-if-needed/2.2.31:
     resolution: {integrity: sha512-dGCXy99wZQivjmjIqihaBQNjryrz5rueJY7eHfTdyWEiR4ttYpsajb14rn9s5d4DY4EcY6+4+U/maARBXJedkA==}
     dependencies:
@@ -11133,13 +11094,6 @@ packages:
 
   /ua-parser-js/0.7.33:
     resolution: {integrity: sha512-s8ax/CeZdK9R/56Sui0WM6y9OFREJarMRHqLB2EwkovemBxNQ+Bqu8GAsUnVcXKgphb++ghr/B2BZx4mahujPw==}
-    dev: false
-
-  /umi-request/1.4.0:
-    resolution: {integrity: sha512-OknwtQZddZHi0Ggi+Vr/olJ7HNMx4AzlywyK0W3NZBT7B0stjeZ9lcztA85dBgdAj3KVk8uPJPZSnGaDjELhrA==}
-    dependencies:
-      isomorphic-fetch: 2.2.1
-      qs: 6.11.0
     dev: false
 
   /umi/4.0.52_4igwsy37cad63ltlhziorzny2q:
