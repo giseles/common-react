@@ -20,7 +20,7 @@
     "axios": "^1.3.3",
     "braft-editor": "^2.3.9",
     "common-hook": "1.0.5",
-    "common-mid": "0.5.10",
+    "common-mid": "0.5.12",
     "common-screw": "1.2.6",
     "crypto-js": "^4.1.1",
     "use-deep-compare-effect": "^1.8.1"

@@ -29,7 +29,7 @@
   .menu {
     padding-top: 48px;
     width: 100%;
-    .menu1 {
+    > div {
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -48,7 +48,15 @@
           width: 44px;
           height: 44px;
           border-radius: 4px;
+          color: '#fff';
           font-size: 30px;
+        }
+      }
+      &:hover {
+        :global {
+          .anticon {
+            background: rgba(225, 225, 225, 0.3);
+          }
         }
       }
     }
@@ -57,8 +65,7 @@
       border-right: 1px solid @primary-color;
       // color: @primary-color;
     }
-    .active,
-    .menu1:hover {
+    .active {
       :global {
         .anticon {
           background: rgba(225, 225, 225, 0.3);

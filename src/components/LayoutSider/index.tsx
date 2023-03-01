@@ -1,17 +1,32 @@
 import React, { useState, memo, useEffect } from 'react';
 import { isNil } from 'common-screw';
-import { Link, useModel } from 'umi';
+import { Link, useModel, history } from 'umi';
 import { IconFont } from '@/components';
 import styles from './index.less';
 
 const Sider = ({ ...props }) => {
   const { collapsed, pathname, toggle } = props;
   const { menuList } = useModel('global');
+
   const pathSnippets = pathname.split('/').filter((i: any) => i);
   const [hoverList, setHoverList]: any = useState(null);
   const menuMain = ['/home', '/team', '/project', '/task'];
-  const iconEnter = (item?: any) => {};
-  const jumpHome = (path?: any) => {};
+  const iconEnter = (item?: any) => {
+    setHoverList(menuMain.includes(item.path) ? null : item);
+    !menuMain.includes(item.path) && collapsed && toggle();
+    menuMain.includes(item.path) && !collapsed && toggle();
+  };
+  const jumpHome = (path?: any) => {
+    path && menuMain.includes(path) && history.push(path);
+  };
+
+  const mouseMove = (e: any) => {
+    // console.log(e.clientX)
+    if (e.clientX > 85 + 250) {
+      hoverList.path !== '/home' && !collapsed && toggle();
+      setTimeout(setHoverList(null), 500);
+    }
+  };
 
   useEffect(() => {
     if (!isNil(hoverList)) {
@@ -25,14 +40,6 @@ const Sider = ({ ...props }) => {
     };
   }, [hoverList]);
 
-  const mouseMove = (e: any) => {
-    // console.log(e.clientX)
-    if (e.clientX > 85 + 250) {
-      hoverList.path !== '/home' && !collapsed && toggle();
-      setTimeout(setHoverList(null), 500);
-    }
-  };
-
   return (
     <>
       <div className={styles.sider}>
@@ -43,14 +50,11 @@ const Sider = ({ ...props }) => {
             return (
               <div
                 key={item.path}
-                className={[styles.menu1, active && styles.active]}
+                className={active ? styles.active : ''}
                 onMouseEnter={() => iconEnter(item)}
                 onClick={() => jumpHome(item.path)}
               >
-                <IconFont
-                  type={`${item.icon}${'-02'}`}
-                  style={{ color: '#fff' }}
-                />
+                <IconFont type={`${item.icon}${'-02'}`} />
                 {item.name}
               </div>
             );

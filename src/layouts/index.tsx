@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Outlet, useLocation, useModel } from 'umi';
+import { Outlet, useLocation } from 'umi';
 import { App } from 'antd';
 
 import {
@@ -10,7 +10,6 @@ import 'antd/dist/reset.css';
 import Base from './Base';
 
 export default () => {
-  // const { toClear } = useModel('global');
   let location = useLocation();
   useEffect(() => {}, [location]);
 

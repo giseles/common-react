@@ -1,14 +1,26 @@
-import { Link, Outlet } from 'umi';
+import React, { useState, useCallback } from 'react';
+import { Link, Outlet, useLocation } from 'umi';
 import { Button } from 'antd';
 import styles from './index.less';
 import LayoutHeader from '@/components/LayoutHeader';
 import LayoutSider from '@/components/LayoutSider';
 export default () => {
+  const [collapsed, setCollapsed] = useState(true);
+  let location = useLocation();
+  const { pathname } = location;
+
+  const toggle = useCallback(() => {
+    setCollapsed(!collapsed);
+  }, [collapsed]);
   return (
     <div className={styles.layout}>
-      <LayoutSider collapsed={true} toggle={true} pathname={'/home'} />
+      <LayoutSider collapsed={collapsed} toggle={toggle} pathname={pathname} />
       <div className={styles.right}>
-        <LayoutHeader collapsed={true} toggle={true} pathname={'/home'} />
+        <LayoutHeader
+          collapsed={collapsed}
+          toggle={toggle}
+          pathname={pathname}
+        />
         <div className={styles.scroll}>
           <div className={styles.content}>
             <Button type="primary">Button</Button>

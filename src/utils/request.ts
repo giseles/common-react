@@ -1,7 +1,8 @@
 // request.js
 import axios from 'axios';
+import { message } from 'antd';
 import { storage as Storage } from 'common-screw';
-import { throwMessage } from './index';
+import { Message } from '@/components';
 
 const requestConfig = {
   timeout: 5000,
@@ -127,39 +128,14 @@ class Request {
     console.log('data', data);
     if (data.code === '8001') {
       return data;
-    } else if (/locales\/.*\.json/.test(url)) {
-      // const arr = []
-      // Object.keys(data).forEach(key => {
-      //   // arr.push(key)
-      //   arr.push(data[key])
-      // })
-      // console.log(arr)
-      // 如果是语言包选项
-      return data;
-    } else if (
-      url.indexOf('/base/export') > 0 ||
-      url.indexOf('/base/importVehicle') > 0 ||
-      url.indexOf('/output') > 0 ||
-      url.indexOf('/manage/operate') > 0 ||
-      url.indexOf('/upGrade/getOldVersion') > 0 ||
-      url.indexOf('/equ/exportEqu') > 0 ||
-      url.indexOf('/equ/importEqu') > 0 ||
-      url.indexOf('/base/importVehicle') > 0 ||
-      url.indexOf('/dvc/export') > 0 ||
-      url.indexOf('/equ/export') > 0 ||
-      url.indexOf('/back/export') > 0 ||
-      url.indexOf('/log/down') > 0 ||
-      url.indexOf('baidu.com') > 0 ||
-      url.indexOf('amap.com') > 0 ||
-      url.indexOf('sockjs-node') > 0
-    ) {
-      return data;
     } else if (data.code === '401') {
       console.log(data);
+      Message(data);
       return Promise.reject({ status: data.code, message: data.msg });
     } else {
       console.log(data);
-      throwMessage(data);
+      Message(data);
+      // message.success('sdfsd');
       return Promise.reject({ status: data.code, message: data.msg });
       // return data
     }

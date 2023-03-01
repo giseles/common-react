@@ -4,6 +4,7 @@ export * from './Empty';
 export * from './IconFont';
 export * from './LayoutHeader';
 export * from './LayoutSider';
+export * from './Message';
 // export * from './ImgCrop';
 // export * from './PageHeader';
 // export * from './RichText';

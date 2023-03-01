@@ -1,17 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useAppData, history } from 'umi';
+import { useState, useCallback } from 'react';
 import { login } from './service';
 
 export default () => {
   const [loading, setLoading] = useState(false);
-  let pathname = useAppData().history.location.pathname;
-  useEffect(() => {
-    console.log(pathname);
-    console.log('sdfsfsdaaa');
-    return () => {
-      console.log('离开');
-    };
-  }, [pathname]);
 
   // 清空状态
   const toClear = useCallback(() => {
@@ -19,13 +10,12 @@ export default () => {
   }, []);
 
   // 登录
-  const toSubmit = useCallback(async (data) => {
+  const toSubmit = useCallback(async (data, callback) => {
     setLoading(true);
     try {
       const res = await login(data);
       console.log(res);
-      console.log('sdfsfsd');
-      history.push('/home');
+      callback(res);
     } catch (err) {
       setLoading(false);
     }
