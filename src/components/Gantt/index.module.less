@@ -1,0 +1,98 @@
+.table {
+  .date {
+    height: 50px;
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      &:first-child {
+        border-bottom: 1px solid #666;
+      }
+      li {
+        border-right: 1px solid #666;
+        text-align: center;
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+    .bottom {
+      li {
+        min-width: 22px;
+      }
+    }
+  }
+  .barWrap {
+    width: 100%;
+    height: 100%;
+    .bar {
+      height: 100%;
+      background: lightcoral;
+    }
+  }
+}
+
+.table {
+  :global {
+    // 自适应尺寸
+    .ant-table-thead > tr > th:first-child,
+    .ant-table-tbody > tr > td:first-child {
+      overflow: hidden;
+      min-width: 150px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    // .ant-table-thead > tr > th:last-child,
+    // .ant-table-tbody > tr > td:last-child {
+    //   overflow: inherit;
+    // }
+
+    .ant-table-wrapper {
+      overflow: hidden;
+      padding: 32px;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 14px;
+    }
+    .ant-table.ant-table-bordered > .ant-table-container {
+      border: 1px solid #e2e5ed;
+      border-radius: 0;
+    }
+    .ant-table-container {
+      .ant-table-content {
+        color: #4e5d78;
+
+        &::-webkit-scrollbar-track {
+          background-color: #fff;
+          box-shadow: none;
+        }
+
+        &::-webkit-scrollbar {
+          height: 6px;
+          background-color: #c0c0c0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          background-color: #c0c0c0;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: #7c7c7c;
+        }
+      }
+      .ant-table-thead > tr > th {
+        border-color: #e2e5ed;
+        background: #f7f8fa;
+        color: #4e5d78;
+      }
+      .ant-table-tbody > tr > td {
+        border-color: #e2e5ed;
+      }
+
+      .ant-table-tbody > tr.ant-table-row:hover > td {
+        background: #e7efff;
+      }
+    }
+  }
+}

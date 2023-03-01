@@ -11,9 +11,9 @@ export default defineConfig({
     {
       path: '/',
       routes: [
-        { path: '/', component: '404' },
-        { path: '/home', component: '404' },
-        { path: '/home', component: '404' },
+        { path: '/', component: 'Home/list' },
+        { path: '/home', component: 'Home/list' },
+        { path: '/home/detail', component: 'Home/detail' },
       ],
     },
     { path: '/*', component: '404' },
@@ -26,5 +26,6 @@ export default defineConfig({
     },
   },
   favicons: ['/assets/favicon.ico'],
+  title: '贤芯 - 项目绩效管理平台',
   npmClient: 'pnpm',
 });

@@ -62,7 +62,7 @@ class Request {
     Object.keys(requestConfig).forEach((key) => {
       axios.defaults[key] = requestConfig[key];
     });
-    // axios.defaults.headers['Accept-language'] = Storage.getItem('language')
+    axios.defaults.headers['Accept-language'] = 'zh-CN';
     this.setInterceptors(); // 拦截器
   }
 
@@ -93,10 +93,7 @@ class Request {
       },
       (error) => {
         if (error.message.includes('timeout')) {
-          const message =
-            Storage.getItem('language') === 'zh-CN'
-              ? '网络请求超时，请稍后再试！'
-              : 'Gateway Timeout , Please try again';
+          const message = '网络请求超时，请稍后再试！';
           // return
           return Promise.reject({ status: 503, message });
         } else {
@@ -152,9 +149,7 @@ class Request {
     // 响应时状态码处理
     if (err.response) {
       const status = err.response.status;
-      statusText =
-        codeMessage[Storage.getItem('language') || 'en-US'][status] ||
-        err.response.statusText;
+      statusText = codeMessage['zh-CN'][status] || err.response.statusText;
     } else {
       statusText = err.message;
     }
@@ -175,7 +170,7 @@ class Request {
   requestMethod(url, options = {}) {
     const { method = 'GET', data = {}, ...option } = options;
     const $method = method.toLocaleLowerCase(); // 统一标准小写
-    axios.defaults.headers['Accept-language'] = Storage.getItem('language');
+    axios.defaults.headers['Accept-language'] = 'zh-CN';
     switch (method) {
       case 'GET':
       case 'DELETE':
