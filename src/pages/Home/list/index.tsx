@@ -6,7 +6,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { useDeepCompareEffect } from 'common-hook';
 import { LooseObject, getObjKey } from 'common-screw';
 import { Gantt, Search } from '@/components';
-import { LiteTable } from '@/common';
+import { ProTable } from '@/common';
 // import { apiList, apiDel, apiAble } from './service'
 
 const { Column } = Table;
@@ -110,7 +110,6 @@ export default (props: any) => {
   const onSearch = (values: object) => {
     // console.log('onSearchonSearchonSearch');
     // console.log(values);
-    // dispatch({ type: 'liteTable/list', payload: { ...values } })
   };
 
   return (

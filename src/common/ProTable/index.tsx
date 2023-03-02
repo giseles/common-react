@@ -1,13 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, memo, useEffect, useState } from 'react';
 import { useModel } from 'umi';
 import { Modal, Button } from 'antd';
 import { useDeepCompareEffect, useUnmount } from 'common-hook';
 import { LooseObject } from 'common-screw';
-import { Table, Search, IconFont } from '@/components';
-import { LiteModal } from '@/common';
+import { Table, Search, IconFont, FormModal } from '@/components';
 
-export default memo((props: any) => {
+export const ProTable = memo((props: any) => {
   const { permissionList } = useModel('global');
   const {
     dataSource,
@@ -106,6 +104,7 @@ export default memo((props: any) => {
   };
 
   const onExp = (payload: any) => {
+    console.log(payload);
     // dispatch({ type: 'liteTable/export', payload });
   };
 
@@ -129,7 +128,7 @@ export default memo((props: any) => {
           onHandle={(type: any, item: any) => onHandle(type, item)}
         />
       </div>
-      <LiteModal
+      <FormModal
         formList={formList}
         apiList={apiList}
         {...formModal}

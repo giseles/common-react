@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { useModel, history } from 'umi';
-import { ProForm } from 'common-mid';
+import { ProForm as MidProForm } from 'common-mid';
 import { useUnmount } from 'common-hook';
 import { PageHeader, Form } from '@/components';
 import styles from './index.module.less';
 
-export default (props: any) => {
+export const ProForm = (props: any) => {
   const { loading, toUpdate, toSubmit } = useModel('proForm');
   const {
     type = 'add',
@@ -60,7 +60,7 @@ export default (props: any) => {
 
   const setLoading = (loading: boolean) => toUpdate({ loading });
   return (
-    <ProForm
+    <MidProForm
       className={className || styles.wrap}
       componentProps={componentProps}
       headerProps={headerProps}

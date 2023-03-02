@@ -4,7 +4,6 @@ import { history } from 'umi';
 
 import { useDeepCompareEffect } from 'common-hook';
 import { toString } from 'common-screw';
-import { LiteForm } from 'common';
 import { Description, PageHeader } from '@/components';
 // import { apiAdd } from './service'
 

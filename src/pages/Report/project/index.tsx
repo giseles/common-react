@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useModel } from 'umi';
 import { getObjKey } from 'common-screw';
-import { LiteTable } from '@/common';
+import { ProTable } from '@/common';
 import { apiList, apiExp } from './service';
 
 export default () => {
@@ -75,7 +75,7 @@ export default () => {
     });
   }, []);
   return (
-    <LiteTable
+    <ProTable
       title="项目工时统计报表"
       {...base}
       apiList={{

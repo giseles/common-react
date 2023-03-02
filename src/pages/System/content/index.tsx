@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useModel } from 'umi';
 import { useDeepCompareEffect } from 'common-hook';
-import { LiteTable } from '@/common';
+import { ProTable } from '@/common';
 import { apiList, apiDel, apiAdd, apiEdit } from './service';
 
 export default () => {
@@ -91,7 +91,7 @@ export default () => {
   }, [permissionList, baseEnums]);
 
   return (
-    <LiteTable
+    <ProTable
       title="系统内容维护"
       {...base}
       // add="添加"

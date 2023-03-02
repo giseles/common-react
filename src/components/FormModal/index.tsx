@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { Modal } from 'antd';
-import { LiteForm } from '@/common';
+import { ProForm } from '@/common';
 
-export default memo((props: any) => {
+export const FormModal = memo((props: any) => {
   const { title, open, hieModal, ...restProps } = props;
   // const { type, initialValues, apiList, formList } = restProps
   return (
@@ -14,7 +14,7 @@ export default memo((props: any) => {
         onCancel={() => hieModal()}
         footer={null}
       >
-        <LiteForm
+        <ProForm
           className="null"
           back={() => hieModal()}
           successCallback={() => hieModal()}
