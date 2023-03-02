@@ -76,8 +76,8 @@ export const Form = memo((props: any) => {
     RichText,
   };
   const btnProps = {
-    submitName: intl.get('BASE_SUBMIT'),
-    returnName: returnName || intl.get('BASE_RETURN'),
+    submitName: '提交',
+    returnName: returnName || '返回',
     isShowReturn: true,
     loading,
     setLoading,

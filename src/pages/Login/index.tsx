@@ -8,8 +8,8 @@ import styles from './index.less';
 
 export default () => {
   const { toClear, loading, toSubmit } = useModel('Login.model');
-  const { toLogin, state } = useModel('global');
-  console.log(state);
+  const { toLogin } = useModel('global');
+
   // 组件初始化
   useMount(() => console.log('首次进入'));
   // 组件卸载

@@ -1,6 +1,5 @@
 // request.js
 import axios from 'axios';
-import { message } from 'antd';
 import { storage as Storage } from 'common-screw';
 import { Message } from '@/components';
 
@@ -121,16 +120,14 @@ class Request {
    */
   handleResponseData = (res) => {
     const { data } = res;
-    const { url } = res.config;
+    // const { url } = res.config;
     console.log('data', data);
     if (data.code === '8001') {
       return data;
     } else if (data.code === '401') {
-      console.log(data);
       Message(data);
       return Promise.reject({ status: data.code, message: data.msg });
     } else {
-      console.log(data);
       Message(data);
       // message.success('sdfsd');
       return Promise.reject({ status: data.code, message: data.msg });

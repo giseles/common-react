@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { useModel } from 'umi';
-import { PageHeader, Button } from 'antd';
+import { Button } from 'antd';
+import { PageHeader } from '@/components';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { MidSearch } from 'common-mid';
 // import { MidSearch } from './ss'

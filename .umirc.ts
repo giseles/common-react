@@ -14,6 +14,15 @@ export default defineConfig({
         { path: '/', component: 'Home/list' },
         { path: '/home', component: 'Home/list' },
         { path: '/home/detail', component: 'Home/detail' },
+
+        { path: '/home', component: 'Home/list' },
+        { path: '/home/detail', component: 'Home/detail' },
+
+        { path: '/report/project', component: 'Report/project' },
+        { path: '/report/staff', component: 'Report/staff' },
+
+        { path: '/system/content', component: 'System/content' },
+        { path: '/system/staff', component: 'System/staff' },
       ],
     },
     { path: '/*', component: '404' },

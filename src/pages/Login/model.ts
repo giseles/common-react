@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import { storage as Storage } from 'common-screw';
+
 import { login } from './service';
 
 export default () => {
@@ -14,7 +16,11 @@ export default () => {
     setLoading(true);
     try {
       const res = await login(data);
-      console.log(res);
+      const { user, token, vendorId, type } = res.data;
+      Storage.setItem('token', type + ' ' + token);
+      Storage.setItem('user', { name: user });
+      Storage.setItem('vendorId', vendorId);
+      Storage.setItem('type', type);
       callback(res);
     } catch (err) {
       setLoading(false);

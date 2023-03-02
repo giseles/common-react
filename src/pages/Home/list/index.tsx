@@ -108,8 +108,8 @@ export default (props: any) => {
   ];
 
   const onSearch = (values: object) => {
-    console.log('onSearchonSearchonSearch');
-    console.log(values);
+    // console.log('onSearchonSearchonSearch');
+    // console.log(values);
     // dispatch({ type: 'liteTable/list', payload: { ...values } })
   };
 

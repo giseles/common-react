@@ -9,11 +9,7 @@ import { Description, PageHeader } from '@/components';
 // import { apiAdd } from './service'
 
 export default () => {
-  // console.log(props);
-  // console.log(history);
   console.log(history.location.state);
-  // const initId = props.location.state?.id;
-  // console.log(initId);
   const items = [
     { label: '项目 1', key: 'item-1', children: '内容 1' }, // 务必填写 key
     { label: '项目 2', key: 'item-2', children: '内容 2' },

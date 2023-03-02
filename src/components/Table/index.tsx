@@ -4,7 +4,7 @@ import { MidTable } from 'common-mid';
 import styles from './index.module.less';
 
 export const Table = memo((props: any) => {
-  const { intl, permissionList } = useModel('global');
+  const { permissionList } = useModel('global');
   const {
     current,
     pageSize,

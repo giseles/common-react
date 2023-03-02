@@ -12,7 +12,7 @@ specifiers:
   axios: ^1.3.3
   braft-editor: ^2.3.9
   common-hook: 1.0.5
-  common-mid: 0.5.10
+  common-mid: 0.5.12
   common-screw: 1.2.6
   crypto-js: ^4.1.1
   husky: ^8.0.1
@@ -33,7 +33,7 @@ dependencies:
   axios: 1.3.3
   braft-editor: 2.3.9
   common-hook: 1.0.5
-  common-mid: 0.5.10
+  common-mid: 0.5.12
   common-screw: 1.2.6
   crypto-js: 4.1.1
   use-deep-compare-effect: 1.8.1
@@ -5016,8 +5016,8 @@ packages:
     resolution: {integrity: sha512-IBxRS4Zd8HD8lWw09k2OkWwjp38+ngFASZ5VpIXURBw/IftgpbFs78YRhCbWIZlFrbkkU5ZOPqXvOyksa0rftA==}
     dev: false
 
-  /common-mid/0.5.10:
-    resolution: {integrity: sha512-paSzh1zXr34h16e0oyBr4KV9KSpCYy1Xg7Vg4K0yqJlU/yb3C3alFc45N9YhmkZ0y2a33QEUaV4AuFBJoLWsdQ==}
+  /common-mid/0.5.12:
+    resolution: {integrity: sha512-w4JYSIzES2voo3KVdqhU/kF5tOGnLShwu8WIZpvUhqIfiTDHkk2cjjbaI8q5fSlRTGNIKOZI44XiBlcN09Bcpg==}
     dev: false
 
   /common-path-prefix/3.0.0:

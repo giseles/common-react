@@ -1,7 +1,7 @@
-export const getDateDiffList = (start, end) => {
+export const getDateDiffList = (time1, time2) => {
   const info = {};
-  start = new Date(start);
-  end = new Date(end);
+  const start = new Date(time1);
+  const end = new Date(time2);
   let current = start;
 
   while (current <= end) {

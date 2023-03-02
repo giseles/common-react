@@ -1,9 +1,5 @@
-import { MidMessage } from 'common-mid';
 import { message } from 'antd';
 
-// const config = { top: 65, duration: 3, maxCount: 1 };
-// const successCode = 8001;
-// export const Message = (data: any) => MidMessage(data, config, successCode);
 message.config({
   top: 65,
   duration: 3,

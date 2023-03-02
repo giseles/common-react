@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Outlet, history, useLocation } from 'umi';
+import React from 'react';
+import { Outlet, useLocation } from 'umi';
 import { App } from 'antd';
 import {
   StyleProvider,
@@ -10,21 +10,13 @@ import Base from './Base';
 import './index.less';
 
 export default () => {
-  // let location = useLocation();
-  // useEffect(() => {}, [location]);
-
-  const unListen = history.listen(({ location, action }) => {
-    console.log('sdfsdfds');
-    console.log(location.pathname);
-  });
-  unListen();
-
+  const pathname = useLocation().pathname;
   return (
     <StyleProvider
       hashPriority="high"
       transformers={[legacyLogicalPropertiesTransformer]}
     >
-      <App>{location.pathname === '/login' ? <Outlet /> : <Base />}</App>
+      <App>{pathname === '/login' ? <Outlet /> : <Base />}</App>
     </StyleProvider>
   );
 };

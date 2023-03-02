@@ -1,30 +1,26 @@
-import React, { useCallback, memo, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'dva';
-import { useModel } from 'umi';
+import React, { useCallback } from 'react';
+import { useModel, history } from 'umi';
 import { ProForm } from 'common-mid';
-import { isNil, isString } from 'common-screw';
-import { useDeepCompareEffect } from 'common-hook';
-import { PageHeader, FormTd } from '@/components';
+import { useUnmount } from 'common-hook';
+import { PageHeader, Form } from '@/components';
 import styles from './index.module.less';
 
 export default (props: any) => {
-  const { loading, initList } = useModel('global');
+  const { loading, toUpdate, toSubmit } = useModel('proForm');
   const {
     type = 'add',
     subTitle,
     back,
-    formList: initFormList,
+    formList,
     initialValues = {},
     apiList,
-    preSubmit = null,
     formHandle = {},
     formProps: forProp = {},
     className,
     successCallback,
   } = props;
 
-  const [formList, setFormList] = useState(initFormList);
-  const componentProps = { Header: PageHeader, Form: FormTd };
+  const componentProps = { Header: PageHeader, Form: Form };
   const headerProps = {
     subTitle,
     back,
@@ -32,49 +28,40 @@ export default (props: any) => {
   };
   const formProps = {
     formList,
-    initialValues: { ...initialValues, ...initList },
+    initialValues,
     loading,
     formHandle,
     ...forProp,
   };
 
-  useDeepCompareEffect(() => {
-    const formList: any = [];
-    initFormList &&
-      initFormList.forEach((item: any) => {
-        if (!item.hide) {
-          formList.push(item);
-        }
-      });
-    setFormList(formList);
-  }, [initFormList]);
-
-  useEffect(() => {
-    setLoading(false);
-    return () => {};
-  }, []);
-
-  useDeepCompareEffect(() => {
-    // 获取详情
-    // type === 'edit' && apiList.detail;
-  }, [apiList, type, initialValues]);
+  // 卸载时 重置状态
+  useUnmount(() => toClear());
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    data = preSubmit ? preSubmit(data) : data;
-    if (preSubmit && isNil(data)) {
-      setLoading(false);
-      return null;
-    }
+    toSubmit(
+      {
+        ...data,
+        apiList: apiList[type],
+        id: type === 'edit' && initialValues.id ? initialValues.id : undefined,
+      },
+      () => {
+        if (successCallback) {
+          successCallback();
+          setLoading(false);
+        } else {
+          onBack();
+        }
+      },
+    );
   };
-  const onBack = useCallback(() => {}, [back]);
+  const onBack = useCallback(() => {
+    history.push(back);
+  }, [back]);
 
-  const setLoading = (data: any) => {};
-
+  const setLoading = (loading: boolean) => toUpdate({ loading });
   return (
     <ProForm
       className={className || styles.wrap}
-      children={props.children}
       componentProps={componentProps}
       headerProps={headerProps}
       formProps={formProps}
