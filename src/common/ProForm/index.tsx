@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useModel, history } from 'umi';
+import { useModel } from 'umi';
 import { ProForm as MidProForm } from 'common-mid';
 import { useUnmount } from 'common-hook';
 import { PageHeader, Form } from '@/components';
@@ -7,6 +7,7 @@ import styles from './index.module.less';
 import { isString } from 'common-screw';
 
 export const ProForm = (props: any) => {
+  const { toPush } = useModel('global');
   const { loading, toUpdate, toSubmit, toClear } = useModel('proForm');
   const {
     type = 'add',
@@ -56,7 +57,7 @@ export const ProForm = (props: any) => {
     );
   };
   const onBack = useCallback(() => {
-    isString(back) ? history.push(back) : back();
+    isString(back) ? toPush(back) : back();
   }, [back]);
 
   const setLoading = (loading: boolean) => toUpdate({ loading });

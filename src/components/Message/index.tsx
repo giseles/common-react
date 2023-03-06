@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { history } from 'umi';
+import { useModel } from 'umi';
 
 message.config({
   top: 65,
@@ -7,9 +7,10 @@ message.config({
   maxCount: 1,
 });
 export const Message = (data) => {
+  const { toPush } = useModel('global');
   const msg = data.msg || data;
   if (data.code === '401') {
-    history.push('/login');
+    toPush('/login');
   }
   if (data.code === '8001') {
     message.success(msg);

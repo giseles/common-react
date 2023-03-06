@@ -22,7 +22,7 @@ export default () => {
 
     pathname !== '/login' && Storage.getItem('token') && getMenu(pathname);
     // 没有登录回到登录页
-    !Storage.getItem('token') && history.push('/login');
+    !Storage.getItem('token') && toPush('/login');
   });
 
   // 卸载时 重置状态
@@ -50,7 +50,7 @@ export default () => {
       ablePathList,
       breadcrumbList,
     });
-    history.push(path || fistPath);
+    toPush(path || fistPath);
   }, []);
 
   // 登录
@@ -63,7 +63,28 @@ export default () => {
   const toLoginOut = useCallback(() => {
     Storage.removeItem('token');
     Storage.removeItem('user');
-    history.push('/login');
+    toPush('/login');
+  }, []);
+
+  // 页面跳转
+  const toPush = useCallback((path, data) => {
+    // history.push(
+    //   {
+    //     pathname: '/list',
+    //     search: '?a=b&c=d',
+    //     hash: 'anchor',
+    //   },
+    //   {
+    //     some: 'state-data',
+    //   },
+    // );
+    history.push(path, data);
+  }, []);
+  toExport;
+
+  // 导出表格
+  const toExport = useCallback((data) => {
+    console.log(data);
   }, []);
 
   // 更新状态
@@ -89,5 +110,6 @@ export default () => {
     toLogin,
     toLoginOut,
     toUpdate,
+    toPush,
   };
 };

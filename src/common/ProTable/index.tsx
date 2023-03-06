@@ -6,7 +6,7 @@ import { LooseObject } from 'common-screw';
 import { Table, Search, IconFont, FormModal } from '@/components';
 
 export const ProTable = memo((props: any) => {
-  const { permissionList } = useModel('global');
+  const { permissionList, toPush, toExport } = useModel('global');
   const {
     dataSource,
     searchParams,
@@ -100,12 +100,12 @@ export const ProTable = memo((props: any) => {
         break;
       default:
       // 跳转
+      // toPush()
     }
   };
 
   const onExp = (payload: any) => {
-    console.log(payload);
-    // dispatch({ type: 'liteTable/export', payload });
+    toExport(payload);
   };
 
   return (

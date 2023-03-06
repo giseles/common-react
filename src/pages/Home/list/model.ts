@@ -1,10 +1,11 @@
 import { useState, useCallback } from 'react';
 
 export default () => {
-  const initState = { menuList: [] };
+  const initState = { menuList: 'wahhhahhh' };
   const [state, setState] = useState<any>(initState);
-
+  const ddd = 'sdfsdfsdfsdfsdf ';
   return {
-    state,
+    ddd,
+    ...state,
   };
 };

@@ -1,23 +1,25 @@
 import React, { useState, memo, useEffect } from 'react';
 import { isNil } from 'common-screw';
-import { Link, useModel, history } from 'umi';
+import { Link, useModel } from 'umi';
 import { IconFont } from '@/components';
 import styles from './index.less';
 
 const Sider = ({ ...props }) => {
   const { collapsed, pathname, toggle } = props;
-  const { menuList } = useModel('global');
+  const { menuList, toPush } = useModel('global');
+  const [hoverList, setHoverList]: any = useState(null);
 
   const pathSnippets = pathname.split('/').filter((i: any) => i);
-  const [hoverList, setHoverList]: any = useState(null);
   const menuMain = ['/home', '/team', '/project', '/task'];
+
   const iconEnter = (item?: any) => {
     setHoverList(menuMain.includes(item.path) ? null : item);
     !menuMain.includes(item.path) && collapsed && toggle();
     menuMain.includes(item.path) && !collapsed && toggle();
   };
+
   const jumpHome = (path?: any) => {
-    path && menuMain.includes(path) && history.push(path);
+    path && menuMain.includes(path) && toPush(path);
   };
 
   const mouseMove = (e: any) => {

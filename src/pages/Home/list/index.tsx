@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Space, Switch, Table } from 'antd';
-import { history } from 'umi';
+import { useModel } from 'umi';
 
 import type { ColumnsType } from 'antd/es/table';
 import { useDeepCompareEffect } from 'common-hook';
@@ -12,6 +12,9 @@ import { ProTable } from '@/common';
 const { Column } = Table;
 
 export default (props: any) => {
+  const { toPush } = useModel('global');
+  const { ddd } = useModel('Home.list.model');
+  console.log(ddd);
   const [base, setBase] = useState<any>({});
   const baseEnums = {};
 
@@ -46,7 +49,7 @@ export default (props: any) => {
           return (
             <div
               className="textLink"
-              onClick={() => history.push('/home/detail', { id: _.key })}
+              onClick={() => toPush('/home/detail', { id: _.key })}
             >
               {item}
             </div>
