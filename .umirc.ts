@@ -6,6 +6,16 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
+  npmClient: 'pnpm',
+  title: '贤芯 - 项目绩效管理平台',
+  favicons: ['/assets/favicon.ico'],
+  proxy: {
+    '/api': {
+      target: 'https://gateway-admin-travel.newtest.senthink.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
   routes: [
     { path: '/login', component: 'Login' },
     {
@@ -27,14 +37,4 @@ export default defineConfig({
     },
     { path: '/*', component: '404' },
   ],
-  proxy: {
-    '/api': {
-      target: 'https://gateway-admin-travel.newtest.senthink.com/',
-      changeOrigin: true,
-      pathRewrite: { '^/api': '' },
-    },
-  },
-  favicons: ['/assets/favicon.ico'],
-  title: '贤芯 - 项目绩效管理平台',
-  npmClient: 'pnpm',
 });
