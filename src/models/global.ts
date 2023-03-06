@@ -3,7 +3,7 @@ import { menuData } from '@/constants';
 import { useState, useCallback } from 'react';
 import { history } from 'umi';
 import { useMount, useUnmount } from 'common-hook';
-import { toMenuData } from 'common-screw';
+import { storage as Storage, toMenuData } from 'common-screw';
 
 export default () => {
   const initState = {
@@ -17,13 +17,19 @@ export default () => {
   const [state, setState] = useState<any>(initState);
 
   // 首次进入时
-  useMount(() => getMenu());
+  useMount(() => {
+    const pathname = history.location.pathname;
+
+    pathname !== '/login' && Storage.getItem('token') && getMenu(pathname);
+    // 没有登录回到登录页
+    !Storage.getItem('token') && history.push('/login');
+  });
 
   // 卸载时 重置状态
   useUnmount(() => toClear());
 
   // 获取菜单
-  const getMenu = useCallback(() => {
+  const getMenu = useCallback((path) => {
     const baseConfig = {
       name: 'name',
       icon: 'icon',
@@ -44,14 +50,20 @@ export default () => {
       ablePathList,
       breadcrumbList,
     });
-    console.log(fistPath);
-    history.push('/home');
+    history.push(path || fistPath);
   }, []);
 
   // 登录
   const toLogin = useCallback((data) => {
     console.log(data);
     getMenu();
+  }, []);
+
+  // 登出
+  const toLoginOut = useCallback(() => {
+    Storage.removeItem('token');
+    Storage.removeItem('user');
+    history.push('/login');
   }, []);
 
   // 更新状态
@@ -75,6 +87,7 @@ export default () => {
   return {
     ...state,
     toLogin,
+    toLoginOut,
     toUpdate,
   };
 };

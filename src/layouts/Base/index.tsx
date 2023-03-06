@@ -1,15 +1,15 @@
 import React, { useState, useCallback } from 'react';
-import { Outlet, useLocation, useModel } from 'umi';
+import { Outlet, useModel } from 'umi';
 import { useDeepCompareEffect } from 'common-hook';
 
 import LayoutHeader from '@/components/LayoutHeader';
 import LayoutSider from '@/components/LayoutSider';
 import styles from './index.less';
 
-export default () => {
+export default (prop: any) => {
+  const { pathname } = prop;
   const { pathHasPermissionList, toUpdate } = useModel('global');
   const [collapsed, setCollapsed] = useState(true);
-  const { pathname } = useLocation();
 
   useDeepCompareEffect(() => {
     // console.log('更新当前页面权限');

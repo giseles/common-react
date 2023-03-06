@@ -4,9 +4,10 @@ import { ProForm as MidProForm } from 'common-mid';
 import { useUnmount } from 'common-hook';
 import { PageHeader, Form } from '@/components';
 import styles from './index.module.less';
+import { isString } from 'common-screw';
 
 export const ProForm = (props: any) => {
-  const { loading, toUpdate, toSubmit } = useModel('proForm');
+  const { loading, toUpdate, toSubmit, toClear } = useModel('proForm');
   const {
     type = 'add',
     subTitle,
@@ -55,7 +56,7 @@ export const ProForm = (props: any) => {
     );
   };
   const onBack = useCallback(() => {
-    history.push(back);
+    isString(back) ? history.push(back) : back();
   }, [back]);
 
   const setLoading = (loading: boolean) => toUpdate({ loading });

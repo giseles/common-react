@@ -132,7 +132,7 @@ export const ProTable = memo((props: any) => {
         formList={formList}
         apiList={apiList}
         {...formModal}
-        hieModal={useCallback(() => setFormModal({ open: false }), [])}
+        hideModal={useCallback(() => setFormModal({ open: false }), [])}
       />
     </>
   );

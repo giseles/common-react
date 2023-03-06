@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 import { ProForm } from '@/common';
 
 export const FormModal = memo((props: any) => {
-  const { title, open, hieModal, ...restProps } = props;
+  const { title, open, hideModal, ...restProps } = props;
   // const { type, initialValues, apiList, formList } = restProps
   return (
     open && (
@@ -11,13 +11,13 @@ export const FormModal = memo((props: any) => {
         width={600}
         title={title}
         open={open}
-        onCancel={() => hieModal()}
+        onCancel={() => hideModal()}
         footer={null}
       >
         <ProForm
           className="null"
-          back={() => hieModal()}
-          successCallback={() => hieModal()}
+          back={() => hideModal()}
+          successCallback={() => hideModal()}
           formProps={{ formLayout: 'center' }}
           {...restProps}
         />

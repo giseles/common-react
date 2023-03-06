@@ -6,18 +6,15 @@ import {
   UserOutlined,
   ExportOutlined,
 } from '@ant-design/icons';
+import { useModel } from 'umi';
 import { storage as Storage } from 'common-screw';
 import styles from './index.less';
 
 const Header = (props: any) => {
+  const { toLoginOut } = useModel('global');
   const { collapsed } = props;
 
   const userMenu: any = [
-    {
-      label: '个人中心',
-      key: 'info',
-      icon: <UserOutlined />,
-    },
     {
       label: '退出',
       key: 'signOut',
@@ -25,9 +22,7 @@ const Header = (props: any) => {
     },
   ];
   const onChangeUserMenu = (e: any) => {
-    if (e.key === 'info') {
-    } else if (e.key === 'signOut') {
-    }
+    toLoginOut();
   };
 
   return (

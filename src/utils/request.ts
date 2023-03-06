@@ -124,14 +124,9 @@ class Request {
     console.log('data', data);
     if (data.code === '8001') {
       return data;
-    } else if (data.code === '401') {
-      Message(data);
-      return Promise.reject({ status: data.code, message: data.msg });
     } else {
       Message(data);
-      // message.success('sdfsd');
       return Promise.reject({ status: data.code, message: data.msg });
-      // return data
     }
   };
 

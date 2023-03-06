@@ -11,12 +11,15 @@ import './index.less';
 
 export default () => {
   const pathname = useLocation().pathname;
+
   return (
     <StyleProvider
       hashPriority="high"
       transformers={[legacyLogicalPropertiesTransformer]}
     >
-      <App>{pathname === '/login' ? <Outlet /> : <Base />}</App>
+      <App>
+        {pathname === '/login' ? <Outlet /> : <Base pathname={pathname} />}
+      </App>
     </StyleProvider>
   );
 };
