@@ -3,12 +3,12 @@ import { routes } from './src/routes'
 import { AMAP_KEY } from './src/config'
 
 const prodConfig = {}
-const devConfig = {}
+const devConfig = {} 
 switch (process.env.NODE_ENV) {
-  case 'development': // 测试环境
+  case 'development': // 测试环境 后台地址
     devConfig.proxy = {
       '/API_BASE': {
-        target: 'http://gateway-antenna-monitor.newtest.senthink.com',
+        target: 'common-react',//后台地址
         changeOrigin: true,
         pathRewrite: { '^/API_BASE': '' }
       }
@@ -27,7 +27,7 @@ export default defineConfig({
   request: {},
   outputPath: 'build',
   npmClient: 'pnpm',
-  title: '室分天线网络监测平台',
+  title: 'common-react 平台',
   locale: {
     default: 'zh-CN'
   },

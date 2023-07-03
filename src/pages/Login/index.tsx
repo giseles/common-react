@@ -21,7 +21,7 @@ export default connect(Model)(({ dispatch, loading }) => {
       <div className={styles.logo} />
       <div className={styles.name}>
         <div className={styles.top}>欢迎使用</div>
-        <div className={styles.bottom}>室分天线网络监测平台</div>
+        <div className={styles.bottom}>common-react 平台</div>
       </div>
 
       <article className={styles.right}>
