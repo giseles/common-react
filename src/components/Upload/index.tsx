@@ -1,37 +1,35 @@
-import React, { memo } from 'react';
-import { MidUpload } from 'common-mid';
-import { storage } from 'common-screw';
-import { Message } from '@/components';
-import styles from './index.module.less';
+import React, { memo } from 'react'
+import { MidUpload } from 'common-mid'
+import { storage } from 'common-screw'
+import { Message } from '@/components'
+import { api } from '@/utils'
+import styles from './index.less'
 
 export const Upload = memo((props: any) => {
-  const fileServerUrl = '';
-  const imageUploadUrl = '';
-  const videoUploadUrl = '';
-  const fileUploadUrl = '';
-  const { type, limits } = props;
+  const { type, limits } = props
+  const { apiUpload, apiImgOss } = api
   const typeInfo: any = {
     image: {
       typeName: '图片',
-      uploadUrl: imageUploadUrl,
-      limits: { fileType: 'image', maxSize: '10', ...limits },
+      uploadUrl: apiUpload,
+      limits: { fileType: 'image', maxSize: '10', ...limits }
     },
     video: {
       typeName: '视频',
-      uploadUrl: videoUploadUrl,
-      limits: { fileType: 'video', maxSize: '100', ...limits },
+      uploadUrl: apiUpload,
+      limits: { fileType: 'video', maxSize: '100', ...limits }
     },
     file: {
       typeName: '文件',
-      uploadUrl: fileUploadUrl,
-      limits: { maxSize: '10', ...limits },
+      uploadUrl: apiUpload,
+      limits: { maxSize: '10', ...limits }
     },
     imageCrop: {
       typeName: '图片',
-      uploadUrl: imageUploadUrl,
-      limits: { aspect: 1, fileType: 'image', maxSize: '10', ...limits },
-    },
-  };
+      uploadUrl: apiUpload,
+      limits: { aspect: 1, fileType: 'image', maxSize: '10', ...limits }
+    }
+  }
 
   return (
     <MidUpload
@@ -40,7 +38,7 @@ export const Upload = memo((props: any) => {
       {...typeInfo[type]}
       message={Message}
       headers={{ authorization: storage.getItem('token') }}
-      serverUrl={fileServerUrl}
+      serverUrl={apiImgOss}
     />
-  );
-});
+  )
+})

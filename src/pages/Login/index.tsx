@@ -1,71 +1,54 @@
-import React from 'react';
-import { useModel } from 'umi';
-import { Form, Input, Button } from 'antd';
-import { useMount, useUnmount } from 'common-hook';
-import { IconFont } from '@/components';
-import { Encrypt } from '@/utils';
-import styles from './index.less';
+import React from 'react'
+import { connect } from 'umi'
+import { Form, Input, Button } from 'antd'
+import { useUnmount } from 'common-hook'
+import { Encrypt } from '@/utils'
+import styles from './index.less'
 
-export default () => {
-  const { toClear, loading, toSubmit } = useModel('Login.model');
-  const { toLogin } = useModel('global');
-
-  // 组件初始化
-  useMount(() => console.log('首次进入'));
+const Model = (dva) => {
+  return { ...dva.login }
+}
+export default connect(Model)(({ dispatch, loading }) => {
   // 组件卸载
-  useUnmount(() => toClear());
+  useUnmount(() => dispatch({ type: 'common/toReset', payload: { name: 'login' } }))
 
-  const onSubmit = (values: any) => {
-    toSubmit(
-      { username: values.username, password: Encrypt(values.password) },
-      toLogin,
-    );
-  };
+  const onSubmit = (data: any) => {
+    dispatch({ type: 'login/toSubmit', payload: { ...data, password: Encrypt(data.password) } })
+  }
 
   return (
     <div className={styles.wrap}>
-      <main>
-        <div className={styles.bgImg}></div>
-        <div className={styles.leftImg}></div>
-        <article className={styles.right}>
-          <header className={styles.title}>
-            <div className={styles.img}></div>
-            <div className={styles.name}>欢迎登录出行服务平台</div>
-          </header>
+      <div className={styles.logo} />
+      <div className={styles.name}>
+        <div className={styles.top}>欢迎使用</div>
+        <div className={styles.bottom}>室分天线网络监测平台</div>
+      </div>
 
-          <Form className={styles.loginForm} onFinish={onSubmit}>
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: '请输入用户名' }]}
-            >
-              <Input
-                placeholder="请输入用户名"
-                autoComplete="off"
-                prefix={<IconFont type="icondl_zh" style={{ fontSize: 20 }} />}
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: '请输入密码' }]}
-            >
-              <Input.Password
-                placeholder="请输入密码"
-                prefix={<IconFont type="icondl_mm" style={{ fontSize: 20 }} />}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                loading={loading}
-                type="primary"
-                htmlType="submit"
-                className={styles.btn}
-              >
-                登录
-              </Button>
-            </Form.Item>
-          </Form>
-        </article>
-      </main>
+      <article className={styles.right}>
+        <header className={styles.title}>账号登录</header>
+        <div className={styles.bar} />
+        <Form className={styles.loginForm} onFinish={onSubmit}>
+          <div className={styles.formName}>
+            <div className={[styles.icon, styles.iconUser].join(' ')} />
+            用户名
+          </div>
+          <Form.Item name="loginName" rules={[{ required: true, message: '请输入用户名' }]}>
+            <Input placeholder="请输入用户名" autoComplete="off" />
+          </Form.Item>
+          <div className={styles.formName}>
+            <div className={[styles.icon, styles.iconPassword].join(' ')} />
+            密码
+          </div>
+          <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }]}>
+            <Input.Password placeholder="请输入密码" />
+          </Form.Item>
+          <Form.Item>
+            <Button loading={loading} type="primary" htmlType="submit" className={styles.btn}>
+              登录
+            </Button>
+          </Form.Item>
+        </Form>
+      </article>
     </div>
-  );
-};
+  )
+})

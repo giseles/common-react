@@ -1,115 +1,63 @@
-// 全局共享数据示例
-import { menuData } from '@/constants';
-import { useState, useCallback } from 'react';
-import { history } from 'umi';
-import { useMount, useUnmount } from 'common-hook';
-import { storage as Storage, toMenuData } from 'common-screw';
+import { storage as Storage } from 'common-screw'
+import { BaseReducer, toPush } from '@/utils'
 
-export default () => {
-  const initState = {
-    menuList: [],
-    pathHasPermissionList: {},
-    breadcrumbList: {},
-    ablePathList: [],
+export default {
+  namespace: 'global',
+  state: {
+    message: { time: 0 }, // message提示
+    menuList: [], // 菜单数据
+    permissionTree: [], // 菜单权限树
+    pathHasPermissionList: {}, // 路由所拥有功能权限
+    breadcrumbList: {}, // 面包屑数据
+    ablePathList: [], // 可访问页面
     permissionList: {}, // 当前页面权限
-    baseEnums: {}, // 常用枚举
-  };
-  const [state, setState] = useState<any>(initState);
-
-  // 首次进入时
-  useMount(() => {
-    const pathname = history.location.pathname;
-
-    pathname !== '/login' && Storage.getItem('token') && getMenu(pathname);
-    // 没有登录回到登录页
-    !Storage.getItem('token') && toPush('/login');
-  });
-
-  // 卸载时 重置状态
-  useUnmount(() => toClear());
-
-  // 获取菜单
-  const getMenu = useCallback((path) => {
-    const baseConfig = {
-      name: 'name',
-      icon: 'icon',
-      path: 'url',
-      children: 'children',
-      isHide: ({ url, isMenu }) => Boolean(url && !isMenu),
-    };
-    const {
-      menuList, // 菜单数据
-      pathHasPermissionList, // 路由所拥有功能权限
-      breadcrumbList, // 面包屑数据
-      ablePathList, // 可访问页面
-      fistPath, // 第一个有效路由
-    } = toMenuData(menuData, baseConfig);
-    toUpdate({
-      menuList,
-      pathHasPermissionList,
-      ablePathList,
-      breadcrumbList,
-    });
-    toPush(path || fistPath);
-  }, []);
-
-  // 登录
-  const toLogin = useCallback((data) => {
-    console.log(data);
-    getMenu();
-  }, []);
-
-  // 登出
-  const toLoginOut = useCallback(() => {
-    Storage.removeItem('token');
-    Storage.removeItem('user');
-    toPush('/login');
-  }, []);
-
-  // 页面跳转
-  const toPush = useCallback((path, data) => {
-    // history.push(
-    //   {
-    //     pathname: '/list',
-    //     search: '?a=b&c=d',
-    //     hash: 'anchor',
-    //   },
-    //   {
-    //     some: 'state-data',
-    //   },
-    // );
-    history.push(path, data);
-  }, []);
-  toExport;
-
-  // 导出表格
-  const toExport = useCallback((data) => {
-    console.log(data);
-  }, []);
-
-  // 更新状态
-  const toUpdate = useCallback(
-    (data) => {
-      setState({
-        ...state,
-        ...data,
-      });
-      console.log('toUpdate');
-      console.log(data);
+    baseEnum: { warningPeriod: {} }, // 常用枚举
+    urlHistory: [] // URL历史,刷新页面后重置
+  },
+  subscriptions: {
+    setup({ history, dispatch }) {
+      const { pathname, search } = history.location
+      const path = pathname + search
+      const token = Storage.getItem('token')
+      if (token) {
+        // 登录状态时 初始化基本数据
+        dispatch({ type: 'toInit', payload: { path } })
+        dispatch({ type: 'toHistory', payload: { path } })
+      } else {
+        // 没有token 跳转登录页
+        toPush('/login')
+      }
     },
-    [state],
-  );
-
-  // 重置状态
-  const toClear = useCallback(() => {
-    setState(initState);
-  }, [initState]);
-
-  return {
-    ...state,
-    toLogin,
-    toLoginOut,
-    toUpdate,
-    toPush,
-  };
-};
+    // 监听URL
+    watchUrl({ dispatch, history }) {
+      return history.listen(({ location }) => {
+        const { pathname, search } = location
+        dispatch({
+          type: 'toHistory',
+          payload: { path: pathname + search }
+        })
+      })
+    }
+  },
+  effects: {
+    // 初始化基本数据
+    *toInit({ payload }, { put }) {
+      const { path } = payload
+      yield put({ type: 'common/toMenu', payload: { path } })
+      yield put({ type: 'common/getEnum' })
+      // yield put({ type: 'common/getCity' })
+    },
+    // 记录URL历史
+    *toHistory({ payload }, { put, select }) {
+      const { urlHistory } = yield select((_) => _.global)
+      const { path } = payload
+      if (path !== urlHistory[0]) {
+        yield put({
+          type: 'toUpdate',
+          payload: { urlHistory: [path, ...urlHistory].slice(0, 2) }
+        })
+      }
+    }
+  },
+  ...BaseReducer
+}

@@ -1,0 +1,95 @@
+.siderOpen {
+  width: 208px;
+}
+.siderClose {
+  width: 85px;
+}
+.sider {
+  height: 100vh;
+  background: #fff;
+  box-shadow: 3px 3px 16px 0px rgba(43, 56, 82, 0.1);
+  transition: 0.5s ease all;
+  .logo {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 64px; // background: url('../../assets/dl_logo.png') no-repeat center center;
+    background-size: 50%;
+    box-shadow: 0px 3px 12px 0px rgba(43, 56, 82, 0.1);
+  }
+  .dot {
+    min-width: 6px !important;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a7b4c9;
+  }
+  :global {
+    .ant-menu-item-selected::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: #4a7dff;
+      content: '';
+    }
+    .ant-menu-inline .ant-menu-item,
+    .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+      margin-right: 0;
+      margin-left: 0;
+      width: 100%;
+      height: 46px;
+      border-radius: 0;
+      line-height: 46px;
+    }
+    .ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+      background: #fff;
+      color: #a7b4c9;
+    }
+
+    .ant-menu-light.ant-menu-root.ant-menu-vertical {
+      border-right: none;
+    }
+    .ant-menu .ant-menu-sub .ant-menu-item-selected .ant-menu-item-icon {
+      background: #4a7dff;
+    }
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    background-position: center center;
+    background-size: 22px;
+    background-repeat: no-repeat;
+  }
+  .icon1 {
+    background-image: url('../../assets/menu/left_sy_n.png');
+  }
+  .icon2 {
+    background-image: url('../../assets/menu/left_zdgl_n.png');
+  }
+  .icon3 {
+    background-image: url('../../assets/menu/left_jcgl_n.png');
+  }
+  .icon4 {
+    background-image: url('../../assets/menu/left_gjgl_n.png');
+  }
+  .icon5 {
+    background-image: url('../../assets/menu/left_xtgl_n.png');
+  }
+  .icon1s {
+    background-image: url('../../assets/menu/left_sy_s.png');
+  }
+  .icon2s {
+    background-image: url('../../assets/menu/left_zdgl_s.png');
+  }
+  .icon3s {
+    background-image: url('../../assets/menu/left_jcgl_s.png');
+  }
+  .icon4s {
+    background-image: url('../../assets/menu/left_gjgl_s.png');
+  }
+  .icon5s {
+    background-image: url('../../assets/menu/left_xtgl_s.png');
+  }
+}

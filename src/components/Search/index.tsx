@@ -1,47 +1,35 @@
-import React, { memo } from 'react';
-import { useModel } from 'umi';
-import { Button } from 'antd';
-import { PageHeader } from '@/components';
-import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
-import { MidSearch } from 'common-mid';
-// import { MidSearch } from './ss'
-import styles from './index.module.less';
+import React, { memo } from 'react'
+import { useSelector } from 'dva'
+import { Button, Header } from '@/components'
+import { SearchOutlined, PlusOutlined } from '@ant-design/icons'
+import { MidSearch } from 'common-mid'
+import styles from './index.less'
 
 export const Search = memo((props: any) => {
-  const { permissionList } = useModel('global');
-  const { title, children, ...restProps } = props;
+  const { permissionList } = useSelector((_: any) => _.global)
+  const { title, children, searchBtm, ...restProps } = props
   const addProps = {
     isShow: permissionList.add,
     onClick: props.addHandle ? props.addHandle : () => props.addClick('add'),
     icon: <PlusOutlined />,
-    name: props.addBtn || props.add || '添加',
-  };
-  const searchIcon = (
-    <SearchOutlined
-      className="site-form-item-icon"
-      style={{ color: '#3082F9' }}
-    />
-  );
+    name: props.addBtn || props.add || '添加'
+  }
+  const searchIcon = <SearchOutlined className="site-form-item-icon" style={{ color: '#3082F9' }} />
 
   const addBtn = addProps.isShow && (
-    <Button key="add" type="primary" onClick={addProps.onClick}>
-      {addProps.name}
-    </Button>
-  );
+    <Button key="add" type="add" onClick={addProps.onClick} name={addProps.name} />
+  )
   return (
     <div className={styles.section}>
       {title && (
-        <PageHeader
+        <Header
           title={title}
-          className={styles.header}
           extra={[children, addBtn]}
+          style={{ paddingBottom: 10, borderBottom: ' 1px solid #E2E5ED' }}
         />
       )}
-      <MidSearch
-        addProps={{ isShow: false }}
-        searchIcon={searchIcon}
-        {...restProps}
-      />
+      <MidSearch addProps={{ isShow: false }} searchIcon={searchIcon} {...restProps} />
+      {searchBtm}
     </div>
-  );
-});
+  )
+})

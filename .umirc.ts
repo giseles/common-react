@@ -1,40 +1,42 @@
-import { defineConfig } from '@umijs/max';
+import { defineConfig } from '@umijs/max'
+import { routes } from './src/routes'
+import { AMAP_KEY } from './src/config'
 
+const prodConfig = {}
+const devConfig = {}
+switch (process.env.NODE_ENV) {
+  case 'development': // 测试环境
+    devConfig.proxy = {
+      '/API_BASE': {
+        target: 'http://gateway-antenna-monitor.newtest.senthink.com',
+        changeOrigin: true,
+        pathRewrite: { '^/API_BASE': '' }
+      }
+    }
+    break
+  case 'production': // 正式环境
+    prodConfig.extraBabelPlugins = ['transform-remove-console']
+    break
+}
 export default defineConfig({
   antd: {},
   access: {},
   model: {},
+  dva: {},
   initialState: {},
   request: {},
+  outputPath: 'build',
   npmClient: 'pnpm',
-  title: '贤芯 - 项目绩效管理平台',
-  favicons: ['/assets/favicon.ico'],
-  proxy: {
-    '/api': {
-      target: 'https://gateway-admin-travel.newtest.senthink.com/',
-      changeOrigin: true,
-      pathRewrite: { '^/api': '' },
-    },
+  title: '室分天线网络监测平台',
+  locale: {
+    default: 'zh-CN'
   },
-  routes: [
-    { path: '/login', component: 'Login' },
-    {
-      path: '/',
-      routes: [
-        { path: '/', component: 'Home/list' },
-        { path: '/home', component: 'Home/list' },
-        { path: '/home/detail', component: 'Home/detail' },
-
-        { path: '/home', component: 'Home/list' },
-        { path: '/home/detail', component: 'Home/detail' },
-
-        { path: '/report/project', component: 'Report/project' },
-        { path: '/report/staff', component: 'Report/staff' },
-
-        { path: '/system/content', component: 'System/content' },
-        { path: '/system/staff', component: 'System/staff' },
-      ],
-    },
-    { path: '/*', component: '404' },
+  routes,
+  scripts: [
+    'https://webapi.amap.com/maps?v=1.4.15&key=' +
+      AMAP_KEY +
+      '&plugin=AMap.Autocomplete,AMap.PlaceSearch'
   ],
-});
+  ...devConfig,
+  ...prodConfig
+})

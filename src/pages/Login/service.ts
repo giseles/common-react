@@ -1,3 +1,6 @@
-import { axios } from '@/utils';
+import { axios, api } from '@/utils'
 
-export const login = async (data: any) => axios.post('/api/auth', { data });
+const { login } = api
+
+// 登录 API
+export const apiLogin = async (data: any) => axios.post(login, { data })

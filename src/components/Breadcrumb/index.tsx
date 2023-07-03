@@ -1,51 +1,55 @@
-import React, { memo } from 'react';
-import { useModel, Link } from 'umi';
+import React, { memo, useEffect, useState } from 'react'
+import { Link } from 'umi'
+import { Breadcrumb as AntdBreadcrumb } from 'antd'
+import styles from './index.less'
 
-import { IconFont } from '@/components';
-import { MidBreadcrumb } from 'common-mid';
-import styles from './index.module.less';
+export const Breadcrumb = memo((props) => {
+  const { pathname, breadcrumbList, ablePathList } = props
+  const [items, setItems] = useState([])
 
-export const Breadcrumb = memo((props: any) => {
-  const { breadcrumbList, ablePathList } = useModel('global');
-  const { pathname } = props;
-  const breadProps = {
-    separator: '/',
-  };
-  const baseProps = {
-    isShowIcon: false,
-    homeName: '首页',
-    homeUrl: '/home',
-    homeIcon: 'icon-menu-sy1',
-  };
   const specialList = {
-    noJumpList: {
-      form: null,
-      detail: '详情',
+    nameList: {
+      form: '表单',
+      info: '个人中心'
     },
     jumpList: {
-      ec: null,
-      oc: null,
-      sc: null,
-      employee: '/sc/employee/role',
-      content: '/oc/content/notice',
-    },
-    noShowList: ['home'],
-  };
-  const componentProps = {
-    Link,
-    IconFont,
-  };
+      monitor: null,
+      alarm: null,
+      system: null,
+      form: null,
+      detail: null
+    }
+  }
 
-  return (
-    <MidBreadcrumb
-      className={styles.antdBread}
-      componentProps={componentProps}
-      breadProps={breadProps}
-      baseProps={baseProps}
-      specialList={specialList}
-      pathname={pathname}
-      pathInfo={breadcrumbList}
-      pathShowList={ablePathList}
-    />
-  );
-});
+  useEffect(() => {
+    const { nameList, jumpList } = specialList
+    const pathSnippets: string[] = pathname?.split('/').filter((i: string) => i)
+
+    const items = []
+    ablePathList.includes('/home') &&
+      items.push({
+        title: <Link to="/home">首页</Link>
+      })
+    if (pathname !== '/home') {
+      pathSnippets.forEach((_, index) => {
+        const path = '/' + pathSnippets.slice(0, index + 1).join('/')
+
+        const name = nameList[_] ? nameList[_] : breadcrumbList[path]?.name
+        const to = Object.keys(jumpList).includes(_) ? jumpList[_] : path
+        if (name) {
+          items.push({
+            title: to ? <Link to={to}>{name}</Link> : name
+          })
+        }
+      })
+    }
+
+    setItems(items)
+  }, [pathname, breadcrumbList, ablePathList])
+
+  const property = {
+    separator: '/'
+  }
+
+  return <AntdBreadcrumb className={styles.wrap} items={items} {...property} />
+})

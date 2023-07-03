@@ -1,81 +1,81 @@
 .wrap {
-  display: flex;
   overflow: auto;
-  align-items: center;
-  justify-content: center;
+  min-width: 500px;
   width: 100%;
   height: 100vh;
-  background: rgba(250, 251, 255, 1)
-    linear-gradient(90deg, rgba(82, 162, 255, 1) 0%, rgba(2, 120, 255, 1) 100%);
-  main {
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
-    padding: 0 80px;
-    min-width: 710px;
-    min-height: 720px;
-    width: 85%;
-    height: 80%;
-    border-radius: 16px;
-    background-color: #e8f3ff;
-    box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.08),
-      6px 6px 24px 0px rgba(0, 0, 0, 0.1);
-  }
-  .bgImg {
+  background: url('../../assets/loginBg.jpg') no-repeat center center;
+  background-size: cover;
+  .logo {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 95%;
-    height: 800px;
-    background: url('../../assets/login-img2.png') no-repeat center center;
+    top: 60px;
+    left: 8%;
+    width: 140px;
+    height: 40px; // background: url('../../assets/dl_logo.png') no-repeat center center;
     background-size: contain;
   }
-  .leftImg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60%;
-    height: 100%;
-    background: url('../../assets/login-img.png') no-repeat center center;
-    background-size: contain;
+  .name {
+    position: fixed;
+    bottom: 17%;
+    left: 8%;
+    .top {
+      font-weight: bold;
+      font-size: 54px;
+    }
+
+    .bottom {
+      margin-top: 20px;
+      color: #2b3852;
+      font-size: 40px;
+    }
   }
 
   .right {
+    position: fixed;
+    top: calc(50% - 300px);
+    right: 8%;
     z-index: 999;
-    display: flex;
     overflow: hidden;
-    flex-flow: column;
-    padding: 60px;
-    min-width: 400px;
-    width: 40%;
-    height: 620px;
-    border-radius: 6px;
+    padding: 60px 40px;
+    width: 500px;
+    height: 600px;
+    border-radius: 16px;
     background: #fff;
-    box-shadow: 2px 2px 16px 0px rgba(43, 56, 82, 0.1);
-    font-family: 'Microsoft YaHei', '微软雅黑', 'Segoe UI', Tahoma, Geneva,
-      Verdana, sans-serif;
+    box-shadow: 4px 4px 16px 0px rgba(66, 123, 239, 0.2);
     .title {
-      .img {
-        width: 200px;
-        height: 72px;
-        background: url('../../assets/logo-login.png') no-repeat center left;
+      padding-bottom: 20px;
+      text-align: center;
+      font-size: 34px;
+    }
+    .bar {
+      margin: 0 auto;
+      width: 60px;
+      height: 4px;
+      background: #4a7dff;
+    }
+    .formName {
+      display: flex;
+      align-items: center;
+      margin: 30px 0 10px;
+      font-size: 18px;
+      .icon {
+        margin-right: 10px;
+        width: 22px;
+        height: 22px;
         background-size: contain;
       }
-
-      .name {
-        margin: 20px 0 70px;
-        color: #2b3852;
-        font-weight: bold;
-        font-size: 28px;
+      .iconUser {
+        background: url('../../assets/icon/dl_yhm.png') no-repeat center center;
+      }
+      .iconPassword {
+        background: url('../../assets/icon/dl_mm.png') no-repeat center center;
       }
     }
     .btn {
       margin-top: 60px;
       width: 100%;
-      height: 62px;
-      border-radius: 6px !important;
-      background: #5089fd;
+      height: 66px;
+      border-radius: 33px;
+      background: #4a7dff;
       font-size: 22px;
     }
   }
@@ -84,37 +84,17 @@
 .loginForm {
   // 改造Ant表单样式
   :global {
-    .ant-input {
-      &:-webkit-autofill {
-        background: transparent;
-        transition: background-color 50000s ease-in-out 0s;
-
-        -webkit-text-fill-color: #2b3852;
-      }
-      &:-webkit-autofill::first-line {
-        font-size: 16px !important;
-      }
-    }
-    .ant-form-item {
-      margin-bottom: 32px;
-    }
+    .ant-input,
     .ant-input-affix-wrapper {
-      // border: 1px solid #5089fd;
-      border: 1px solid #e2e5ed;
-      border-radius: 6px !important;
-      background: #f7f8fa !important;
+      padding: 15px 14px;
+      border: none;
+      background: #f7f8fa;
       font-size: 16px;
+      line-height: 30px;
     }
-    .ant-input-affix-wrapper-status-success:active {
-      border: 1px solid #5089fd;
-    }
-    .ant-input-affix-wrapper > .ant-input:not(textarea) {
-      padding: 10px 11px;
-      background: #f7f8fa !important;
-    }
-    .ant-input-affix-wrapper-status-error
-      .ant-input::-webkit-input-placeholder {
-      color: #e35639;
+    .ant-input-affix-wrapper-status-error .ant-input::-webkit-input-placeholder,
+    .ant-input-status-error::-webkit-input-placeholder {
+      color: #ff7875;
     }
     .ant-form-item-control-input-content > * {
       box-shadow: none !important;
@@ -122,5 +102,15 @@
     .ant-form-item-explain {
       display: none;
     }
+  }
+  input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    font-size: 16px;
+  }
+  input:-internal-autofill-previewed,
+  input:-internal-autofill-selected {
+    transition: background-color 5000s ease-in-out 0s !important;
+
+    -webkit-text-fill-color: #333 !important;
   }
 }

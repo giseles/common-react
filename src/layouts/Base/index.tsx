@@ -1,38 +1,54 @@
-import React, { useState, useCallback } from 'react';
-import { Outlet, useModel } from 'umi';
-import { useDeepCompareEffect } from 'common-hook';
+import React, { useState, useCallback } from 'react'
+import { Outlet, connect } from 'umi'
+import { useDeepCompareEffect } from 'common-hook'
+import { isNil } from 'common-screw'
+import Header from '../Header'
+import Sider from '../Sider'
+import styles from './index.less'
 
-import LayoutHeader from '@/components/LayoutHeader';
-import LayoutSider from '@/components/LayoutSider';
-import styles from './index.less';
-
-export default (prop: any) => {
-  const { pathname } = prop;
-  const { pathHasPermissionList, toUpdate } = useModel('global');
-  const [collapsed, setCollapsed] = useState(true);
-
+const Model = (dva) => {
+  return { ...dva.global }
+}
+export default connect(Model)((props) => {
+  const { dispatch, pathname, pathHasPermissionList, menuList, breadcrumbList, ablePathList } =
+    props
+  const [collapsed, setCollapsed] = useState(false)
   useDeepCompareEffect(() => {
     // console.log('更新当前页面权限');
-    const permissionsArr = pathHasPermissionList[pathname] || [];
-    let permissionList = {};
+    if (isNil(pathHasPermissionList)) return
+
+    const permissionsArr = pathHasPermissionList[pathname] || []
+    let permissionList = {}
     for (const elem of permissionsArr) {
-      permissionList[elem] = true;
+      permissionList[elem] = true
     }
-    toUpdate({ permissionList });
-  }, [pathname, pathHasPermissionList]);
+    dispatch({
+      type: 'global/toUpdate',
+      payload: { permissionList }
+    })
+  }, [pathname, pathHasPermissionList])
 
   const toggle = useCallback(() => {
-    setCollapsed(!collapsed);
-  }, [collapsed]);
+    setCollapsed(!collapsed)
+  }, [collapsed])
+
+  const toLoginOut = useCallback(() => {
+    dispatch({
+      type: 'common/toLogOut'
+    })
+  }, [])
 
   return (
     <div className={styles.layout}>
-      <LayoutSider collapsed={collapsed} toggle={toggle} pathname={pathname} />
-      <div className={styles.right}>
-        <LayoutHeader
+      <Sider collapsed={collapsed} menuList={menuList} toggle={toggle} pathname={pathname} />
+      <div className={[styles.right, collapsed ? styles.rightClose : styles.rightOpen].join(' ')}>
+        <Header
           collapsed={collapsed}
+          toLoginOut={toLoginOut}
           toggle={toggle}
           pathname={pathname}
+          breadcrumbList={breadcrumbList}
+          ablePathList={ablePathList}
         />
         <div className={styles.scroll}>
           <div className={styles.content}>
@@ -41,5 +57,5 @@ export default (prop: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+})

@@ -1,0 +1,39 @@
+.table {
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 6px;
+  background: #ffffff;
+  transition: 0.5s ease all;
+  :global {
+    .ant-table-wrapper .ant-table-thead > tr > th {
+      border-bottom: none;
+    }
+    .ant-table-wrapper .ant-table-container table > thead > tr:first-child > *:first-child {
+      border-bottom-left-radius: 4px;
+    }
+    .ant-table-wrapper .ant-table-container table > thead > tr:first-child > *:last-child {
+      border-bottom-right-radius: 4px;
+    }
+
+    .ant-table-wrapper .ant-table-tbody > .ant-table-placeholder > td {
+      border-bottom: none;
+    }
+    // 鼠标悬浮背景色
+    .ant-table-container .ant-table-tbody > tr.ant-table-row:hover > td {
+      background: #f8f8f8;
+    }
+
+    // 自适应尺寸 不换行
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      overflow: hidden;
+      max-width: 380px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .ant-table-thead > tr > th:last-child,
+    .ant-table-tbody > tr > td:last-child {
+      overflow: inherit;
+    }
+  }
+}

@@ -1,22 +1,42 @@
-import { message } from 'antd';
-import { useModel } from 'umi';
+import { getDvaApp, history } from 'umi'
+import { isObject, isString } from 'common-screw'
 
-message.config({
-  top: 65,
-  duration: 3,
-  maxCount: 1,
-});
 export const Message = (data) => {
-  const { toPush } = useModel('global');
-  const msg = data.msg || data;
+  const msg = data?.msg?.substr(0, 30) || data?.substr(0, 30)
+
   if (data.code === '401') {
-    toPush('/login');
+    history.push('/login')
   }
   if (data.code === '8001') {
-    message.success(msg);
+    messageBase.success(msg)
   } else if (data.code === 'loading') {
-    message.loading(msg);
+    messageBase.loading(msg)
   } else {
-    message.error(msg);
+    messageBase.error(msg)
   }
-};
+}
+
+export const messageBase = {
+  success: (props) => commonMessage('success', props),
+  error: (props) => commonMessage('error', props),
+  info: (props) => commonMessage('info', props),
+  warning: (props) => commonMessage('warning', props),
+  loading: (props) => commonMessage('loading', props)
+}
+
+const commonMessage = (type, config) => {
+  let content = {}
+  if (isString(config)) {
+    content = {
+      content: config
+    }
+  } else if (isObject(config)) {
+    content = {
+      ...config
+    }
+  }
+  getDvaApp()._store.dispatch({
+    type: 'common/toMessage',
+    payload: { type, time: +new Date(), ...content }
+  })
+}

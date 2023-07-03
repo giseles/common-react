@@ -1,3 +1,5 @@
-export default (props) => {
-  return <div>404</div>;
-};
+import { Empty } from '@/components'
+
+export default () => {
+  return <Empty />
+}

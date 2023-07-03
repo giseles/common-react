@@ -1,0 +1,2 @@
+@Library('pipeline-lib')_
+jenkinsForNPM 'dockerfile/Dockerfile','yarn install','yarn build','node:16'

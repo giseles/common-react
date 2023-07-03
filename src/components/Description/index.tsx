@@ -1,23 +1,17 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo } from 'react'
 import { MidDescription } from 'common-mid'
-import { timestampToDate } from 'common-screw'
-import styles from './index.module.less'
+import styles from './index.less'
 
-export const Description = memo((props: any) => {
-  const { column, descProps, type, ...restProps } = props
-
-
-
+export const Description = memo((props) => {
+  const { column, descProps, ...restProps } = props
+  const property = {
+    colon: false,
+    bordered: false,
+    labelStyle: { alignItems: 'center', marginRight: 5 }, // 标签样式
+    contentStyle: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, // 内容样式
+    ...descProps
+  }
   return (
-    <MidDescription
-      {...restProps}
-      column={column}
-      className={
-        descProps?.bordered === false
-          ? styles.wrap
-          : [styles.borderWrap, type === 'detail' && styles.detail]
-      }
-      descProps={{ bordered: true, ...descProps }}
-    />
+    <MidDescription column={column} className={styles.wrap} property={property} {...restProps} />
   )
 })
