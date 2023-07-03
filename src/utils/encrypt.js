@@ -3,7 +3,7 @@ import ENC_UTF8 from 'crypto-js/enc-utf8'
 import ECB_MODE from 'crypto-js/mode-ecb'
 import PAD_PKCS7 from 'crypto-js/pad-pkcs7'
 
-const SECRET = 'dsjhkghibdzskjbv' // 密匙
+const SECRET = 'common-react' // 密匙
 
 export const Encrypt = (word) => {
   const key = ENC_UTF8.parse(SECRET)
